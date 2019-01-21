@@ -2,6 +2,37 @@
 WeChat wxpay-sdk
 基于微信官方sdk，版本3.0.9，修改了其中验签部分代码
 
+验签方法没有签名方法参数，源代码在WXPay类中
+
+public boolean isPayResultNotifySignatureValid(Map<String, String> reqData) throws Exception {
+        String signTypeInData = reqData.get(WXPayConstants.FIELD_SIGN_TYPE);
+        SignType signType;
+        if (signTypeInData == null) {
+            signType = SignType.MD5;
+        }
+        else {
+            signTypeInData = signTypeInData.trim();
+            if (signTypeInData.length() == 0) {
+                signType = SignType.MD5;
+            }
+            else if (WXPayConstants.MD5.equals(signTypeInData)) {
+                signType = SignType.MD5;
+            }
+            else if (WXPayConstants.HMACSHA256.equals(signTypeInData)) {
+                signType = SignType.HMACSHA256;
+            }
+            else {
+                throw new Exception(String.format("Unsupported sign_type: %s", signTypeInData));
+            }
+        }
+        return WXPayUtil.isSignatureValid(reqData, this.config.getKey(), signType);
+    }
+    
+修改后代码
+
+public boolean isPayResultNotifySignatureValid(Map<String, String> reqData, WXPayConstants.SignType signType) throws Exception {
+        return WXPayUtil.isSignatureValid(reqData, this.config.getKey(), signType);
+    }    
 # 附
 1.获取用户IP的方法
 
