@@ -3,9 +3,9 @@ WeChat wxpay-sdk
 基于微信官方sdk，版本3.0.9，修改了其中验签部分代码
 
 # 附
-1.获取用户IP的工具类和方法
+1.获取用户IP的方法
 
-public class WXUtils {``````
+public class WXUtils {
 
     private WXUtils() {
     }
