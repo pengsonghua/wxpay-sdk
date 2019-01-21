@@ -5,6 +5,7 @@
     <groupId>com.github.wxpay</groupId>
     <artifactId>wxpay-sdk</artifactId>
     <version>3.0.9</version>
+    <packaging>jar</packaging>
     <name>wxpay-sdk</name>
     <description>wxpay-sdk</description>
 
