@@ -3,7 +3,7 @@ WeChat wxpay-sdk
 基于微信官方sdk，版本3.0.9，修改了其中验签部分代码
 
 验签方法没有签名方法参数，源代码在WXPay类中
-
+~~~
 public boolean isPayResultNotifySignatureValid(Map<String, String> reqData) throws Exception {
         String signTypeInData = reqData.get(WXPayConstants.FIELD_SIGN_TYPE);
         SignType signType;
@@ -27,15 +27,16 @@ public boolean isPayResultNotifySignatureValid(Map<String, String> reqData) thro
         }
         return WXPayUtil.isSignatureValid(reqData, this.config.getKey(), signType);
     }
-    
+~~~    
 修改后代码
-
+~~~
 public boolean isPayResultNotifySignatureValid(Map<String, String> reqData, WXPayConstants.SignType signType) throws Exception {
         return WXPayUtil.isSignatureValid(reqData, this.config.getKey(), signType);
-    }    
+    }
+~~~        
 # 附
 1.获取用户IP的方法
-
+~~~
 public class WXUtils {
 
     private WXUtils() {
@@ -66,9 +67,9 @@ public class WXUtils {
         return ip;
     }
 }
-
+~~~
 2.IWXPayDomain实现类
-
+~~~
 public class WXPayDomainImpl implements IWXPayDomain {
 
     private final int MIN_SWITCH_PRIMARY_MSEC = 3 * 60 * 1000;  //3 minutes
@@ -164,3 +165,4 @@ public class WXPayDomainImpl implements IWXPayDomain {
         }
     }
 }
+~~~
